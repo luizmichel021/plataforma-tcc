@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Customer.Models
+namespace plataformatcc.Models
 {
     public class Customer
     {
@@ -11,6 +11,7 @@ namespace Customer.Models
         private DateOnly _brithdate;
         private DateTime _created_at;
         private DateTime _update_at;
+        private bool _active;
 
         public int Id 
         {
@@ -54,6 +55,12 @@ namespace Customer.Models
             set{_update_at = value;}
         }
 
+        public bool Active
+        {
+            get{return Active;}
+            set{_active = value;}
+        }
+
         public Customer(){}
 
         public Customer(int _id, string _name, string _surname, string _email, DateOnly _birthdate, DateTime _created_at, DateTime _update_at)
@@ -65,6 +72,7 @@ namespace Customer.Models
             Brithdate = _birthdate;
             Created_at = _created_at;
             Update_at = _update_at;
+            Active = _active;
 
         }
     }
