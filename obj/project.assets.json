@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dev-michel/Projects/c#projects/plataforma-tcc/plataforma-tcc.csproj",
+      "projectUniqueName": "/home/dev-michel/Projects/c#projects/plataformatcc/plataforma-tcc.csproj",
       "projectName": "plataforma-tcc",
-      "projectPath": "/home/dev-michel/Projects/c#projects/plataforma-tcc/plataforma-tcc.csproj",
+      "projectPath": "/home/dev-michel/Projects/c#projects/plataformatcc/plataforma-tcc.csproj",
       "packagesPath": "/home/dev-michel/.nuget/packages/",
-      "outputPath": "/home/dev-michel/Projects/c#projects/plataforma-tcc/obj/",
+      "outputPath": "/home/dev-michel/Projects/c#projects/plataformatcc/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dev-michel/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LX/k5/75hbY=",
+  "dgSpecHash": "Kteo+p4R8tc=",
   "success": true,
-  "projectFilePath": "/home/dev-michel/Projects/c#projects/plataforma-tcc/plataforma-tcc.csproj",
+  "projectFilePath": "/home/dev-michel/Projects/c#projects/plataformatcc/plataforma-tcc.csproj",
   "expectedPackageFiles": [
     "/home/dev-michel/.nuget/packages/microsoft.aspnetcore.diagnostics.entityframeworkcore/9.0.2/microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.2.nupkg.sha512",
     "/home/dev-michel/.nuget/packages/microsoft.entityframeworkcore/9.0.2/microsoft.entityframeworkcore.9.0.2.nupkg.sha512",

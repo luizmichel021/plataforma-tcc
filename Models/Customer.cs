@@ -67,9 +67,5 @@ namespace Customer.Models
             Update_at = _update_at;
 
         }
-        
-
-
-        
     }
 }
