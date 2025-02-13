@@ -1,17 +1,9 @@
-using plataformatcc.Models;
 
-namespace plataformatcc.Interfaces
+
+namespace plataformatcc.Interfaces.ICustomer
 {
     public interface ICustomer
     {
-        bool create(Customer customer);
-
-        bool update();
-
-        bool partialUpdate();
-
-        bool delete(int id);
-
-        List<Customer> listCustomers();
+        Customer create(Customer customer);
     }
 }
