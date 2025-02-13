@@ -1,0 +1,74 @@
+# Ignore build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Aa]rguments/
+
+# Ignore Visual Studio temporary files, directories, and files
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+.vs2019/
+.vsconfig
+.vscode/settings.json
+
+# User-specific files (Windows)
+Thumbs.db
+Desktop.ini
+
+# ASP.NET Scaffolding
+Scaffolding/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer Patch
+*.wixpdb
+
+# Ignore node_modules folder for front-end dependencies (if using Node.js in your project)
+node_modules/
+
+# Ignore NPM and Yarn lock files (if applicable)
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignore JetBrains Rider project files (if using Rider)
+.idea/
+
+# Ignore ASP.NET Core environment-specific settings
+appsettings.*.json
+
+# Ignore published output
+publish/
+
+# Ignore global.json (for SDK version control)
+global.json
+
+# Ignore bin and obj folders
+bin/
+obj/
+
+# Ignore .user files (for Visual Studio)
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Ignore test result files
+TestResults/
+
+# Ignore coverage results
+coverage/
+
+# Ignore Docker related files (optional)
+.docker/
+.dockerignore
+
+# Ignore NuGet Packages
+*.nupkg
