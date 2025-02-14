@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("plataforma-tcc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9e690813e2106ea8453cd331dc9a6e67cb297dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9b95bc65ba3ef9d9b1aa8f6f0d41dd5166b9f70")]
 [assembly: System.Reflection.AssemblyProductAttribute("plataforma-tcc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("plataforma-tcc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

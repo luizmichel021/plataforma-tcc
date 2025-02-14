@@ -2,7 +2,7 @@ using plataformatcc.Models;
 
 namespace plataformatcc.Interfaces
 {
-    public interface ICustomer
+    public interface ICustomerStorage
     {
         bool create(Customer customer);
         bool update();
