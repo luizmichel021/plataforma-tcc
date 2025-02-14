@@ -482,3 +482,26 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Pastas de build e compilação
+bin/
+obj/
+Debug/
+Release/
+
+# Pastas de saída específicas do .NET 9
+**/net9.0*/
+
+# Configuração do Rider/JetBrains
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Arquivos temporários do VSCode
+.vscode/
+
+# Logs e arquivos de depuração
+*.log
+logs/
