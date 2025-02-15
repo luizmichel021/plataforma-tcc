@@ -2,6 +2,7 @@ using plataformatcc.Interfaces;
 using plataformatcc.Models;
 using plataformatcc.Connection;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Storages.StorageCustomer
 {   
@@ -44,19 +45,71 @@ namespace Storages.StorageCustomer
                     _logger.LogError("[Storage-Customer] - Error when finishing user creation");
                     return false;
                 }
-
-                
-
-
             }
         }
 
         public bool delete(int id)
-        {
+        {   
+            _logger.LogDebug("[Storage-Customer] - Starting delete");
+            using(var Connection = connection.GetConnection())
+            {
+                Connection.Open();
+                _logger.LogInformation("[Storage-Customer] - Connection on database");
+                var cmd = new MySqlCommand("UPDATE customer SET active = false WHERE id = @id", Connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                var ret = cmd.ExecuteNonQuery();
+
+                if(ret != 0)
+                {
+                    _logger.LogInformation("[Storage-Customer] - User deleted/deactivated in the database");
+                    return true;  
+                }
+                else
+                {
+                    _logger.LogError("[Storage-Customer] - Error when finishing user deleted/deactivated");
+                    return false;
+                }
+            }
+        }
+        public Customer getCustomer(int id)
+        {   
+            _logger.LogDebug("[Storage-Customer] - Starting GetCustomer");
+            using(var Connection = connection.GetConnection())
+            {
+                Connection.Open();
+                _logger.LogInformation("[Storage-Customer] - Connection on database");
+
+                var cmd = new MySqlCommand("SELECT name, surname, email, brithdate, created_at, update_at FROM customer ", Connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                
+
+                var ret = cmd.ExecuteReader();
+
+                if(ret.Read())
+                {
+                    return new Customer
+                    {
+                        Id = ret.GetInt32("id"),
+                        Name = ret.GetString("name"),
+                        Surname = ret.GetString("surname"),
+                        Email = ret.GetString("email"),
+                        Brithdate = ret.GetDateTime("brithdate"),
+                        Created_at = ret.GetDateTime("created_at"),
+                        Update_at = ret.GetDateTime("update_at")
+                    };
+                }
+
+                
+
+                            
+
+            }
             throw new NotImplementedException();
         }
 
-        public List<Customer> listCustomers()
+        public List<Customer> getAllCustomers()
         {
             throw new NotImplementedException();
         }
@@ -70,5 +123,7 @@ namespace Storages.StorageCustomer
         {
             throw new NotImplementedException();
         }
+
+   
     }
 }

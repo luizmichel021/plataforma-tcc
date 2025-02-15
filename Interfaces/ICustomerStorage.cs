@@ -7,7 +7,8 @@ namespace plataformatcc.Interfaces
         bool create(Customer customer);
         bool update();
         bool partialUpdate();
-        List<Customer> listCustomers();
+        List<Customer> getAllCustomers();
         bool delete(int id);
+        Customer getCustomer(int id);
     }
 }

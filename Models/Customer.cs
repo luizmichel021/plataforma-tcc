@@ -8,7 +8,7 @@ namespace plataformatcc.Models
         private string _name;
         private string _surname;
         private string _email;
-        private DateOnly _brithdate;
+        private DateTime _brithdate;
         private DateTime _created_at;
         private DateTime _update_at;
         private bool _active; 
@@ -37,7 +37,7 @@ namespace plataformatcc.Models
             set{_email = value;}
         }
 
-        public DateOnly Brithdate
+        public DateTime Brithdate
         {
             get{return _brithdate;}
             set{_brithdate = value;}
@@ -63,7 +63,7 @@ namespace plataformatcc.Models
 
         public Customer(){}
 
-        public Customer(int _id, string _name, string _surname, string _email, DateOnly _birthdate, DateTime _created_at, DateTime _update_at)
+        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate, DateTime _created_at, DateTime _update_at)
         {
             Id = _id;
             Name = _name;
