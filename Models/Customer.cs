@@ -63,7 +63,7 @@ namespace plataformatcc.Models
 
         public Customer(){}
 
-        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate, DateTime _created_at, DateTime _update_at)
+        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate, DateTime _created_at, DateTime _update_at,bool active)
         {
             Id = _id;
             Name = _name;
@@ -73,7 +73,15 @@ namespace plataformatcc.Models
             Created_at = _created_at;
             Update_at = _update_at;
             Active = _active;
-
         }
+
+        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate)
+        {
+            Id = _id;
+            Name = _name;
+            Surname = _surname;
+            Email = _email;
+            Brithdate = _birthdate;
+        }   
     }
 }
