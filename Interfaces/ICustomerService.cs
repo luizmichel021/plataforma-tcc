@@ -1,14 +1,14 @@
+
 using plataformatcc.Models;
 
-namespace plataformatcc.Interfaces
-{
-    public interface ICustomerStorage
+namespace plataformatcc.Interfaces{
+    public interface ICustomerService
     {
         Customer? create(Customer customer);
-        bool update(Customer customer);
+        Customer update(Customer customer);
         bool partialUpdate();
         List<Customer> getAllCustomers();
-        bool delete(int id);
+        int delete(int id);
         Customer getCustomer(int id);
     }
 }

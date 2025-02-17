@@ -18,33 +18,51 @@ namespace Storages.StorageCustomer
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public bool create(Customer customer)
+        public StorageCustomer()
+        {
+        }
+
+        public Customer? create(Customer customer)
         {
             _logger.LogDebug("[Storage-Customer] - Starting create");
             using (var Connection = connection.GetConnection())
             {
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on database");
-                var cmd = new MySqlCommand("INSERT INTO customers (name, surname, email, brithdate, created_at, update_at) VALUES (@name , @surname, @email, @brithdate, @created_at, @update_at)", Connection);
+                var cmd = new MySqlCommand(
+                "INSERT INTO customers (name, surname, email, birthdate) VALUES (@name , @surname, @email, @birthdate);"
+                + 
+                "SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers WHERE id = LAST_INSERT_ID();", 
+                Connection
+                );
                 cmd.Parameters.AddWithValue("@name", customer.Name);
                 cmd.Parameters.AddWithValue("@surname", customer.Surname);
                 cmd.Parameters.AddWithValue("@email", customer.Email);
-                cmd.Parameters.AddWithValue("@brithdate", customer.Brithdate);
-                cmd.Parameters.AddWithValue("@created_at", customer.Created_at);
-                cmd.Parameters.AddWithValue("@update_at", customer.Update_at);
+                cmd.Parameters.AddWithValue("@birthdate", customer.Birthdate);
 
-                var ret = cmd.ExecuteNonQuery();
-                if(ret != 0)
+                var ret = cmd.ExecuteReader();
+
+                if (ret.Read())
                 {   
-                    _logger.LogInformation("[Storage-Customer] - User created in the database");
-                    return true;
-                    
+                    _logger.LogInformation("[Storage-Customer] - Customer creation was a success.");
+                    return new Customer 
+                    {
+                        Id = ret.GetInt32("id"),
+                        Name = ret.GetString("name"),
+                        Surname = ret.GetString("surname"),
+                        Email = ret.GetString("email"),
+                        Birthdate = ret.GetDateTime("birthdate"),
+                        Created_at = ret.GetDateTime("created_at"),
+                        Update_at = ret.GetDateTime("update_at")
+                    };                    
                 }
                 else
                 {
-                    _logger.LogError("[Storage-Customer] - Error when finishing user creation");
-                    return false;
+                    _logger.LogWarning("[Storage-Customer] - Customer creation failed, returning null.");
+                    return null;
                 }
+                
+
             }
         }
 
@@ -80,7 +98,7 @@ namespace Storages.StorageCustomer
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on database");
 
-                var cmd = new MySqlCommand("SELECT name, surname, email, brithdate, created_at, update_at FROM customers ", Connection);
+                var cmd = new MySqlCommand("SELECT name, surname, email, birthdate, created_at, update_at FROM customers ", Connection);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 
@@ -95,7 +113,7 @@ namespace Storages.StorageCustomer
                         Name = ret.GetString("name"),
                         Surname = ret.GetString("surname"),
                         Email = ret.GetString("email"),
-                        Brithdate = ret.GetDateTime("brithdate"),
+                        Birthdate = ret.GetDateTime("birthdate"),
                         Created_at = ret.GetDateTime("created_at"),
                         Update_at = ret.GetDateTime("update_at")
                     };
@@ -118,7 +136,7 @@ namespace Storages.StorageCustomer
                 
                 var listCustomer = new List<Customer>();
 
-                var cmd = new MySqlCommand("SELECT id, name, surname, email, brithdate, created_at, update_at FROM customers", Connection);
+                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers", Connection);
 
                 var ret = cmd.ExecuteReader();
                 while (ret.Read())
@@ -128,7 +146,7 @@ namespace Storages.StorageCustomer
                         Name = ret.GetString("name"),
                         Surname = ret.GetString("surname"),
                         Email = ret.GetString("email"),
-                        Brithdate = ret.GetDateTime("brithdate"),
+                        Birthdate = ret.GetDateTime("birthdate"),
                         Created_at = ret.GetDateTime("created_at"),
                         Update_at = ret.GetDateTime("update_at")
                     });
@@ -150,12 +168,12 @@ namespace Storages.StorageCustomer
             {
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on Database");
-                var cmd = new MySqlCommand("UPDATE customers SET name = @name, surname = @surname, email = @email, brithdate = @brithdate WHERE id = @id", Connection);
+                var cmd = new MySqlCommand("UPDATE customers SET name = @name, surname = @surname, email = @email, birthdate = @birthdate WHERE id = @id", Connection);
                 cmd.Parameters.AddWithValue("@id", customer.Id);
                 cmd.Parameters.AddWithValue("@name", customer.Name);
                 cmd.Parameters.AddWithValue("@surname", customer.Surname);
                 cmd.Parameters.AddWithValue("@email", customer.Email);
-                cmd.Parameters.AddWithValue("@brithdate", customer.Brithdate);
+                cmd.Parameters.AddWithValue("@birthdate", customer.Birthdate);
 
                 var ret = cmd.ExecuteNonQuery();
                 if (ret != 0)

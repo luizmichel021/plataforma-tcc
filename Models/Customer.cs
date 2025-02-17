@@ -8,7 +8,7 @@ namespace plataformatcc.Models
         private string _name;
         private string _surname;
         private string _email;
-        private DateTime _brithdate;
+        private DateTime _birthdate;
         private DateTime _created_at;
         private DateTime _update_at;
         private bool _active; 
@@ -37,10 +37,10 @@ namespace plataformatcc.Models
             set{_email = value;}
         }
 
-        public DateTime Brithdate
+        public DateTime Birthdate
         {
-            get{return _brithdate;}
-            set{_brithdate = value;}
+            get{return _birthdate;}
+            set{_birthdate = value;}
         }
 
         public DateTime Created_at
@@ -69,7 +69,7 @@ namespace plataformatcc.Models
             Name = _name;
             Surname = _surname;
             Email = _email;
-            Brithdate = _birthdate;
+            Birthdate = _birthdate;
             Created_at = _created_at;
             Update_at = _update_at;
             Active = _active;
@@ -81,7 +81,7 @@ namespace plataformatcc.Models
             Name = _name;
             Surname = _surname;
             Email = _email;
-            Brithdate = _birthdate;
+            Birthdate = _birthdate;
         }   
     }
 }
