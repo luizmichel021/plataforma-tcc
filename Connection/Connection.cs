@@ -4,7 +4,7 @@ namespace plataformatcc.Connection
 {
     public class Connection
     {
-        private string _connectionString = "Server=localhost;Database=Biblioteca;Uid=root;Pwd=123456;";
+        private string _connectionString = "Server=localhost;Database=plataformatcc;Uid=root;Pwd=123456;";
 
         public MySqlConnection GetConnection()
         {

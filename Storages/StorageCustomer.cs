@@ -32,7 +32,7 @@ namespace Storages.StorageCustomer
                 var cmd = new MySqlCommand(
                 "INSERT INTO customers (name, surname, email, birthdate) VALUES (@name , @surname, @email, @birthdate);"
                 + 
-                "SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers WHERE id = LAST_INSERT_ID();", 
+                "SELECT id, name, surname, email, birthdate, created_at, update_at, active FROM customers WHERE id = LAST_INSERT_ID();", 
                 Connection
                 );
                 cmd.Parameters.AddWithValue("@name", customer.Name);
@@ -53,7 +53,8 @@ namespace Storages.StorageCustomer
                         Email = ret.GetString("email"),
                         Birthdate = ret.GetDateTime("birthdate"),
                         Created_at = ret.GetDateTime("created_at"),
-                        Update_at = ret.GetDateTime("update_at")
+                        Update_at = ret.GetDateTime("update_at"),
+                        Active = ret.GetBoolean("active")
                     };                    
                 }
                 else

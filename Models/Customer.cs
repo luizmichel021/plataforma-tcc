@@ -75,13 +75,14 @@ namespace plataformatcc.Models
             Active = _active;
         }
 
-        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate)
+        public Customer(string _name, string _surname, string _email, DateTime _birthdate)
         {
-            Id = _id;
             Name = _name;
             Surname = _surname;
             Email = _email;
             Birthdate = _birthdate;
-        }   
+        }
+
+    
     }
 }

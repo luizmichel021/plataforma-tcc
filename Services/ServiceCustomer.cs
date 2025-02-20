@@ -3,7 +3,7 @@ using plataformatcc.Interfaces;
 using plataformatcc.Models;
 using Storages.StorageCustomer;
 
-namespace plataformatcc.Service.Ser
+namespace plataformatcc.Service
 {
      
     public class ServiceCustomer : ICustomerService
@@ -11,10 +11,11 @@ namespace plataformatcc.Service.Ser
         private readonly ILogger<ServiceCustomer> _logger;
         private readonly StorageCustomer storage = new StorageCustomer();
         
-        public ServiceCustomer(ILogger<ServiceCustomer> logger)
+        public ServiceCustomer(ILogger<ServiceCustomer> logger, StorageCustomer storage)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }   
+            this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
+        }  
         
         
         public Customer? create(Customer customer)
