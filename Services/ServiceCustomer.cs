@@ -1,4 +1,3 @@
-
 using plataformatcc.Interfaces;
 using plataformatcc.Models;
 using Storages.StorageCustomer;
@@ -40,7 +39,21 @@ namespace plataformatcc.Service
 
         public int delete(int id)
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("[Service-Customer] - trying to delete to Customer.");
+            try
+            {
+                var ret = storage.delete(id);
+                if(ret != false)
+                {
+                    _logger.LogInformation("[Service-Customer]- Customer deleted/deactivated a Success");
+                    return id;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "[Service-Customer] - Exception during the deleted/deactivated. Error : {Exception}", e.Message);
+            }
+            return 0;
         }
 
         public List<Customer> getAllCustomers()
@@ -50,7 +63,19 @@ namespace plataformatcc.Service
 
         public Customer getCustomer(int id)
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("[Service-Customer] - trying to Get to Customer.");
+            try
+            {
+                _logger.LogInformation("[Service-Customer] - get to Customer.");
+                return storage.getCustomer(id);
+                
+            }
+            catch (Exception e)
+            {                
+               _logger.LogError(e,"[Service-Customer] - Exception during to get to Customer. Error : {Exception}", e.Message);
+            }
+            return null;
+
         }
 
         public bool partialUpdate()

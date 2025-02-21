@@ -99,7 +99,7 @@ namespace Storages.StorageCustomer
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on database");
 
-                var cmd = new MySqlCommand("SELECT name, surname, email, birthdate, created_at, update_at FROM customers ", Connection);
+                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers ", Connection);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 

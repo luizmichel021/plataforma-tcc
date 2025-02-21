@@ -30,5 +30,35 @@ namespace plataformatcc.ControllerCustomer
                 return BadRequest(new {message = "[Controller-Customer] - Fail to Create Customer."});
             }
         }
+
+        [HttpDelete("{id}")]        
+        public ActionResult Delete(int id)
+        {
+            var ret = _serviceCustomer.delete(id);
+            if(ret == id)
+            {
+                return Ok(ret);
+            }
+            else
+            {
+                return BadRequest(new {message = "[Controller-Customer] - fail to triyng to delet the customer."});
+            }
+        }
+
+        
+        [HttpGet("{id}")]
+        public ActionResult GetCustomer(int id)
+        {
+            var ret = _serviceCustomer.getCustomer(id);
+            if(ret != null)
+            {
+                return Ok(ret);
+            }
+            else
+            {
+                return BadRequest(new {message = "[Controller-Customer] - Fail to trying to get Custumer."});
+            }
+        }
+
     }
 }
