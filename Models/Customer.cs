@@ -3,9 +3,9 @@ namespace plataformatcc.Models
     public class Customer
     {
         private int _id;
-        private string _name;
-        private string _surname;
-        private string _email;
+        private string _name = string.Empty;
+        private string _surname = string.Empty;
+        private string _email = string.Empty;
         private DateTime _birthdate;
         private DateTime _created_at;
         private DateTime _update_at;
@@ -61,6 +61,23 @@ namespace plataformatcc.Models
 
         public Customer(){}
 
+        public Customer(string _name, string _surname, string _email, DateTime _birthdate)
+        {
+            Name = _name;
+            Surname = _surname;
+            Email = _email;
+            Birthdate = _birthdate;
+        }
+
+        public Customer(int id,string _name, string _surname, string _email, DateTime _birthdate)
+        {   
+            Id = _id;
+            Name = _name;
+            Surname = _surname;
+            Email = _email;
+            Birthdate = _birthdate;
+        }
+
         public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate, DateTime _created_at, DateTime _update_at,bool active)
         {
             Id = _id;
@@ -73,13 +90,7 @@ namespace plataformatcc.Models
             Active = _active;
         }
 
-        public Customer(string _name, string _surname, string _email, DateTime _birthdate)
-        {
-            Name = _name;
-            Surname = _surname;
-            Email = _email;
-            Birthdate = _birthdate;
-        }
+        
 
     
     }

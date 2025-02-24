@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Mvc;
 using plataformatcc.Models;
 using plataformatcc.Service;
@@ -20,10 +18,10 @@ namespace plataformatcc.ControllerCustomer
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
-            var retcustomer = _serviceCustomer.create(customer);
-            if (retcustomer != null)
+            var ret = _serviceCustomer.create(customer);
+            if (ret != null)
             {
-                return Ok(retcustomer);
+                return CreatedAtAction(nameof(Get), new { id = ret.Id }, ret);
             }
             else
             {
@@ -37,7 +35,7 @@ namespace plataformatcc.ControllerCustomer
             var ret = _serviceCustomer.delete(id);
             if(ret == id)
             {
-                return Ok(ret);
+                return NoContent();
             }
             else
             {
@@ -47,7 +45,7 @@ namespace plataformatcc.ControllerCustomer
 
         
         [HttpGet("{id}")]
-        public ActionResult GetCustomer(int id)
+        public ActionResult Get(int id)
         {
             var ret = _serviceCustomer.getCustomer(id);
             if(ret != null)
@@ -58,6 +56,28 @@ namespace plataformatcc.ControllerCustomer
             {
                 return BadRequest(new {message = "[Controller-Customer] - Fail to trying to get Custumer."});
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var customers = _serviceCustomer.getAllCustomers();
+            return Ok(customers);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, Customer customer)
+        {
+            var ret = _serviceCustomer.update(id, customer);
+            if(ret == true)
+            {
+                return Ok(Get(id));
+            }
+            else
+            {
+                return BadRequest(new {message = "[Controller-Customer] - Fail to trying to Update Custumer."});
+            }
+            
         }
 
     }

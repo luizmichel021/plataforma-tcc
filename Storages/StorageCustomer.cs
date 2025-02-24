@@ -13,13 +13,11 @@ namespace Storages.StorageCustomer
 
         private readonly ILogger<StorageCustomer> _logger;
 
-        public StorageCustomer(ILogger<StorageCustomer> logger)
+       
+
+        public StorageCustomer(ILogger<StorageCustomer>? logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        public StorageCustomer()
-        {
         }
 
         public Customer? create(Customer customer)
@@ -91,7 +89,8 @@ namespace Storages.StorageCustomer
                 }
             }
         }
-        public Customer getCustomer(int id)
+
+        public Customer? getCustomer(int id)
         {   
             _logger.LogDebug("[Storage-Customer] - Starting GetCustomer");
             using(var Connection = connection.GetConnection())
@@ -99,7 +98,7 @@ namespace Storages.StorageCustomer
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on database");
 
-                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers ", Connection);
+                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at, active FROM customers WHERE id = @id ", Connection);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 
@@ -116,19 +115,20 @@ namespace Storages.StorageCustomer
                         Email = ret.GetString("email"),
                         Birthdate = ret.GetDateTime("birthdate"),
                         Created_at = ret.GetDateTime("created_at"),
-                        Update_at = ret.GetDateTime("update_at")
+                        Update_at = ret.GetDateTime("update_at"),
+                        Active = ret.GetBoolean("active")
                     };
                 }
                 else
                 {   
                     _logger.LogError("[Storage-Customer] - Error no customers found");
-                    return new Customer {};
+                    return null;
                 }
             }
             
         }
 
-        public List<Customer> getAllCustomers()
+        public List<Customer>? getAllCustomers()
         {   
             using(var Connection = connection.GetConnection())
             {
@@ -137,7 +137,7 @@ namespace Storages.StorageCustomer
                 
                 var listCustomer = new List<Customer>();
 
-                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at FROM customers", Connection);
+                var cmd = new MySqlCommand("SELECT id, name, surname, email, birthdate, created_at, update_at, active FROM customers", Connection);
 
                 var ret = cmd.ExecuteReader();
                 while (ret.Read())
@@ -149,7 +149,8 @@ namespace Storages.StorageCustomer
                         Email = ret.GetString("email"),
                         Birthdate = ret.GetDateTime("birthdate"),
                         Created_at = ret.GetDateTime("created_at"),
-                        Update_at = ret.GetDateTime("update_at")
+                        Update_at = ret.GetDateTime("update_at"),
+                        Active = ret.GetBoolean("active")
                     });
                 }
 
@@ -163,18 +164,19 @@ namespace Storages.StorageCustomer
             throw new NotImplementedException();
         }
 
-        public bool update(Customer customer)
+        public bool update(int id,Customer customer)
         {
             using(var Connection = connection.GetConnection())
             {
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on Database");
-                var cmd = new MySqlCommand("UPDATE customers SET name = @name, surname = @surname, email = @email, birthdate = @birthdate WHERE id = @id", Connection);
-                cmd.Parameters.AddWithValue("@id", customer.Id);
+                var cmd = new MySqlCommand("UPDATE customers SET name = @name, surname = @surname, email = @email, birthdate = @birthdate ,update_at = NOW() WHERE id = @id ", Connection);
                 cmd.Parameters.AddWithValue("@name", customer.Name);
                 cmd.Parameters.AddWithValue("@surname", customer.Surname);
                 cmd.Parameters.AddWithValue("@email", customer.Email);
                 cmd.Parameters.AddWithValue("@birthdate", customer.Birthdate);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@update_at", DateTime.Now);
 
                 var ret = cmd.ExecuteNonQuery();
                 if (ret != 0)
