@@ -4,11 +4,11 @@ namespace plataformatcc.Interfaces
 {
     public interface ICustomerStorage
     {
-        Customer? create(Customer customer);
-        bool update(int id,Customer customer);
+        Customer create(Customer customer);
+        bool update(Guid id,Customer customer);
         bool partialUpdate();
         List<Customer>? getAllCustomers();
-        bool delete(int id);
-        Customer? getCustomer(int id);
+        bool delete(Guid id);
+        Customer? getCustomer(Guid id);
     }
 }

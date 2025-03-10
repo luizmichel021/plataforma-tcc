@@ -4,10 +4,10 @@ using plataformatcc.Models;
 namespace plataformatcc.Interfaces{
     public interface ICustomerService
     {
-        Customer? create(Customer customer);
-        bool update(int id, Customer customer);
+        Customer create(Customer customer);
+        bool update(Guid id, Customer customer);
         List<Customer>? getAllCustomers();
-        int delete(int id);
-        Customer? getCustomer(int id);
+        bool delete(Guid id);
+        Customer? getCustomer(Guid id);
     }
 }

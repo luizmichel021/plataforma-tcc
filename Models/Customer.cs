@@ -2,95 +2,73 @@ namespace plataformatcc.Models
 {
     public class Customer
     {
-        private int _id;
-        private string _name = string.Empty;
-        private string _surname = string.Empty;
-        private string _email = string.Empty;
-        private DateTime _birthdate;
-        private DateTime _created_at;
-        private DateTime _update_at;
-        private bool _active; 
+        private Guid id = Guid.NewGuid();
+        private string name = string.Empty;
+        private string surname = string.Empty;
+        private string email = string.Empty;
+        private DateTime birthdate;
+        private DateTime created_at;
+        private DateTime update_at;
+        private bool active; 
 
-        public int Id 
+        public Guid Id 
         {
-            get{return _id;}
-            set{_id = value;}   
-        }
+            set{id = value;}
+            get{return id;}
+        }   
+        
 
         public string Name
         {
-            get{return _name;}
-            set{_name = value;}
+            get{return name;}
+            set{name = value;}
         }
 
         public string Surname
         {
-            get{return _surname;}
-            set{_surname = value;}
+            get{return surname;}
+            set{surname = value;}
         }
-
         public string Email
         {
-            get{return _email;}
-            set{_email = value;}
+            get{return email;}
+            set{email = value;}
         }
 
         public DateTime Birthdate
         {
-            get{return _birthdate;}
-            set{_birthdate = value;}
+            get{return birthdate;}
+            set{birthdate = value;}
         }
 
         public DateTime Created_at
         {
-            get{return _created_at;}
-            set{_created_at = value;}
+            get{return created_at;}
+            set{created_at = value;}
         }
 
         public DateTime Update_at
         {
-            get{return _update_at;}
-            set{_update_at = value;}
+            get{return update_at;}
+            set{update_at = value;}
         }
 
         public bool Active
         {
-            get{return _active;}
-            set{_active = value;}
+            get{return active;}
+            set{active = value;}
         }
 
         public Customer(){}
 
-        public Customer(string _name, string _surname, string _email, DateTime _birthdate)
+        public Customer(string name, string surname, string email, DateTime birthdate)
         {
-            Name = _name;
-            Surname = _surname;
-            Email = _email;
-            Birthdate = _birthdate;
-        }
-
-        public Customer(int id,string _name, string _surname, string _email, DateTime _birthdate)
-        {   
-            Id = _id;
-            Name = _name;
-            Surname = _surname;
-            Email = _email;
-            Birthdate = _birthdate;
-        }
-
-        public Customer(int _id, string _name, string _surname, string _email, DateTime _birthdate, DateTime _created_at, DateTime _update_at,bool active)
-        {
-            Id = _id;
-            Name = _name;
-            Surname = _surname;
-            Email = _email;
-            Birthdate = _birthdate;
-            Created_at = _created_at;
-            Update_at = _update_at;
-            Active = _active;
-        }
-
-        
+            Id = Guid.NewGuid();
+            Name = name;
+            Surname = surname;
+            Email = email;
+            Birthdate = birthdate;
+        }      
 
     
     }

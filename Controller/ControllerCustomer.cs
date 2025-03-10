@@ -30,10 +30,10 @@ namespace plataformatcc.ControllerCustomer
         }
 
         [HttpDelete("{id}")]        
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             var ret = _serviceCustomer.delete(id);
-            if(ret == id)
+            if(ret == true)
             {
                 return NoContent();
             }
@@ -45,7 +45,7 @@ namespace plataformatcc.ControllerCustomer
 
         
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public ActionResult Get(Guid id)
         {
             var ret = _serviceCustomer.getCustomer(id);
             if(ret != null)
@@ -66,12 +66,12 @@ namespace plataformatcc.ControllerCustomer
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(int id, Customer customer)
+        public ActionResult Update(Guid id, Customer customer)
         {
             var ret = _serviceCustomer.update(id, customer);
             if(ret == true)
             {
-                return Ok(Get(id));
+                return NoContent();
             }
             else
             {

@@ -17,7 +17,7 @@ namespace plataformatcc.Service
         }  
         
         
-        public Customer? create(Customer customer)
+        public Customer create(Customer customer)
         {   
             _logger.LogDebug("[Service-Customer] - Trying to create product");
             try
@@ -28,17 +28,16 @@ namespace plataformatcc.Service
                     _logger.LogInformation("[Service-Customer] - Customer created a success");
                     return ret;
                 }
-                return ret;
-
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "[Service-Customer] - Exception during Customer creation. Error: {Exception}", e.Message);
+                return null;
             }
             return null;
         }
 
-        public int delete(int id)
+        public bool delete(Guid id)
         {
             _logger.LogDebug("[Service-Customer] - trying to delete to Customer.");
             try
@@ -46,19 +45,19 @@ namespace plataformatcc.Service
                 if(_storage.delete(id))
                 {
                     _logger.LogInformation("[Service-Customer]- Customer deleted/deactivated a Success");
-                    return id;
+                    return true;
                 }
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "[Service-Customer] - Exception during the deleted/deactivated. Error : {Exception}", e.Message);
             }
-            return 0;
+            return false;
         }
 
 
     
-        public List<Customer>? getAllCustomers()
+        public List<Customer> getAllCustomers()
         {
             _logger.LogDebug("[Service-Customer] - Trying to Get All Customers");
 
@@ -76,7 +75,7 @@ namespace plataformatcc.Service
             return null;
         }
 
-        public Customer? getCustomer(int id)
+        public Customer getCustomer(Guid id)
         {
             _logger.LogDebug("[Service-Customer] - Attempting to retrieve customer with ID: {CustomerId}", id);
             try
@@ -99,7 +98,7 @@ namespace plataformatcc.Service
             return null;
         }
 
-        public bool update(int id, Customer customer)
+        public bool update(Guid id, Customer customer)
         {
             _logger.LogDebug("[Service-Customer] - Trying to update Customer");
             try

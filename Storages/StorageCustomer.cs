@@ -20,7 +20,7 @@ namespace Storages.StorageCustomer
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public Customer? create(Customer customer)
+        public Customer create(Customer customer)
         {
             _logger.LogDebug("[Storage-Customer] - Starting create");
             using (var Connection = connection.GetConnection())
@@ -28,32 +28,21 @@ namespace Storages.StorageCustomer
                 Connection.Open();
                 _logger.LogInformation("[Storage-Customer] - Connection on database");
                 var cmd = new MySqlCommand(
-                "INSERT INTO customers (name, surname, email, birthdate) VALUES (@name , @surname, @email, @birthdate);"
-                + 
-                "SELECT id, name, surname, email, birthdate, created_at, update_at, active FROM customers WHERE id = LAST_INSERT_ID();", 
+                "INSERT INTO customers (id,name, surname, email, birthdate) VALUES (@id,@name , @surname, @email, @birthdate);",
                 Connection
                 );
+                cmd.Parameters.AddWithValue("@id", customer.Id);
                 cmd.Parameters.AddWithValue("@name", customer.Name);
                 cmd.Parameters.AddWithValue("@surname", customer.Surname);
                 cmd.Parameters.AddWithValue("@email", customer.Email);
                 cmd.Parameters.AddWithValue("@birthdate", customer.Birthdate);
+                var ret = cmd.ExecuteNonQuery();
 
-                var ret = cmd.ExecuteReader();
-
-                if (ret.Read())
+                if (ret != 0)
                 {   
                     _logger.LogInformation("[Storage-Customer] - Customer creation was a success.");
-                    return new Customer 
-                    {
-                        Id = ret.GetInt32("id"),
-                        Name = ret.GetString("name"),
-                        Surname = ret.GetString("surname"),
-                        Email = ret.GetString("email"),
-                        Birthdate = ret.GetDateTime("birthdate"),
-                        Created_at = ret.GetDateTime("created_at"),
-                        Update_at = ret.GetDateTime("update_at"),
-                        Active = ret.GetBoolean("active")
-                    };                    
+                    return customer;
+                                    
                 }
                 else
                 {
@@ -65,7 +54,7 @@ namespace Storages.StorageCustomer
             }
         }
 
-        public bool delete(int id)
+        public bool delete(Guid id)
         {   
             _logger.LogDebug("[Storage-Customer] - Starting delete");
             using(var Connection = connection.GetConnection())
@@ -90,7 +79,7 @@ namespace Storages.StorageCustomer
             }
         }
 
-        public Customer? getCustomer(int id)
+        public Customer getCustomer(Guid id)
         {   
             _logger.LogDebug("[Storage-Customer] - Starting GetCustomer");
             using(var Connection = connection.GetConnection())
@@ -109,7 +98,7 @@ namespace Storages.StorageCustomer
                 {
                     return new Customer
                     {
-                        Id = ret.GetInt32("id"),
+                        Id = ret.GetGuid("id"),
                         Name = ret.GetString("name"),
                         Surname = ret.GetString("surname"),
                         Email = ret.GetString("email"),
@@ -128,7 +117,7 @@ namespace Storages.StorageCustomer
             
         }
 
-        public List<Customer>? getAllCustomers()
+        public List<Customer> getAllCustomers()
         {   
             using(var Connection = connection.GetConnection())
             {
@@ -143,7 +132,7 @@ namespace Storages.StorageCustomer
                 while (ret.Read())
                 {
                     listCustomer.Add(new Customer {
-                        Id = ret.GetInt32("id"),
+                        Id = ret.GetGuid("id"),
                         Name = ret.GetString("name"),
                         Surname = ret.GetString("surname"),
                         Email = ret.GetString("email"),
@@ -164,7 +153,7 @@ namespace Storages.StorageCustomer
             throw new NotImplementedException();
         }
 
-        public bool update(int id,Customer customer)
+        public bool update(Guid id,Customer customer)
         {
             using(var Connection = connection.GetConnection())
             {
