@@ -9,5 +9,7 @@ namespace plataformatcc.Interfaces{
         List<Customer>? getAllCustomers();
         bool delete(Guid id);
         Customer? getCustomer(Guid id);
+
+        bool partialUpdate(Guid id, string? name, string? surname, string? email, DateTime? birthdate);
     }
 }

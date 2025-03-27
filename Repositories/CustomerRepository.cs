@@ -4,18 +4,18 @@ using plataformatcc.Connection;
 using MySql.Data.MySqlClient;
 
 
-namespace Storages.StorageCustomer
+namespace Repositories.CustomerRepository
 {   
 
-    public class StorageCustomer : ICustomerStorage
+    public class CustomerRepository : ICustomerRepository
     {   
         private readonly Connection connection = new Connection();
 
-        private readonly ILogger<StorageCustomer> _logger;
+        private readonly ILogger<CustomerRepository> _logger;
 
        
 
-        public StorageCustomer(ILogger<StorageCustomer>? logger)
+        public CustomerRepository(ILogger<CustomerRepository>? logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -148,9 +148,52 @@ namespace Storages.StorageCustomer
             }
         }
 
-        public bool partialUpdate()
+        public bool partialUpdate(Guid id, string? name, string? surname, string? email, DateTime? birthdate)
         {
-            throw new NotImplementedException();
+            using(var Connection = connection.GetConnection())
+            {
+                Connection.Open();
+                _logger.LogInformation("[Storage-Customer] - Connection on Database");
+                var query = "UPDATE customers SET ";
+                var updates = new List<string>();
+                var parameters = new List<MySqlParameter>();
+
+                if(name != "")
+                {
+                    updates.Add("name = @name");
+                    parameters.Add(new MySqlParameter("@name", name));
+                }
+                if(surname != "")
+                {
+                    updates.Add("surname = @surname");
+                    parameters.Add(new MySqlParameter("@surname", surname));
+                }
+                if(email != "")
+                {
+                    updates.Add("email = @email");
+                    parameters.Add(new MySqlParameter("@email", email));
+                }
+                if(birthdate != DateTime.MinValue)
+                {
+                    updates.Add("birthdate = @birthdate");
+                    parameters.Add(new MySqlParameter("@birthdate", birthdate));
+                }
+                if(updates.Count == 0)
+                {
+                    _logger.LogWarning("[Storage-Customer] - No data provided for update.");
+                    return false;
+                }
+                query += string.Join(", ", updates) + " WHERE id = @id";
+                parameters.Add(new MySqlParameter("@id", id));
+
+                var cmd = new MySqlCommand(query, Connection);
+
+                cmd.Parameters.AddRange(parameters.ToArray());
+
+                var ret = cmd.ExecuteNonQuery();
+                return ret > 0;
+                
+            }
         }
 
         public bool update(Guid id,Customer customer)

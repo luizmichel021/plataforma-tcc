@@ -3,9 +3,9 @@ namespace plataformatcc.Models
     public class Customer
     {
         private Guid id = Guid.NewGuid();
-        private string name = string.Empty;
-        private string surname = string.Empty;
-        private string email = string.Empty;
+        private string name;
+        private string surname;
+        private string email;
         private DateTime birthdate;
         private DateTime created_at;
         private DateTime update_at;
