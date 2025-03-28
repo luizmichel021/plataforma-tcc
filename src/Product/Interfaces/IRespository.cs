@@ -1,8 +1,8 @@
 using Models.Product;
 
-namespace plataformatcc.Interfaces
+namespace Interfaces
 {
-    public interface IProductRepository
+    public interface IRepository
     {
         Product Register(Product product);
         bool Update(Guid id,string? name, string? description, float? price, int? quantity);
