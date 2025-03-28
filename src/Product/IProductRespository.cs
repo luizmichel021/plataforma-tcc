@@ -9,7 +9,5 @@ namespace plataformatcc.Interfaces
         bool Delete(Guid id);
         List<Product> ListAllProducts();
         List<Product> ListProducts(string? name, string?description, float? pricemax, float? pricemin, int? quantity);   
-
-
     }
 }
