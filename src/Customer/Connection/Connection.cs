@@ -1,6 +1,6 @@
 using MySql.Data.MySqlClient;
 
-namespace plataformatcc.Connection
+namespace Connections
 {
     public class Connection
     {

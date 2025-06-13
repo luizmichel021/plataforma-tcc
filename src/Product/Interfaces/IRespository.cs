@@ -8,6 +8,6 @@ namespace Interfaces
         bool Update(Guid id,string? name, string? description, float? price, int? quantity);
         bool Delete(Guid id);
         List<Product> ListAllProducts();
-        List<Product> ListProducts(string? name, string?description, float? pricemax, float? pricemin, int? quantity);   
+        List<Product> ListProductsFilter(string? name, string?description, float? pricemax, float? pricemin, int? quantity);   
     }
 }

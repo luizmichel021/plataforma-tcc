@@ -1,21 +1,21 @@
-using plataformatcc.Interfaces;
-using plataformatcc.Models;
-using plataformatcc.Connection;
+using Interfaces;
+using Model;
+using Connections;
 using MySql.Data.MySqlClient;
 
 
-namespace Repositories.CustomerRepository
+namespace Repositories
 {   
 
-    public class CustomerRepository : ICustomerRepository
+    public class Repository : IRepository
     {   
         private readonly Connection connection = new Connection();
 
-        private readonly ILogger<CustomerRepository> _logger;
+        private readonly ILogger<Repository> _logger;
 
        
 
-        public CustomerRepository(ILogger<CustomerRepository>? logger)
+        public Repository(ILogger<Repository>? logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

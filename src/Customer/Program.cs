@@ -1,5 +1,5 @@
-using plataformatcc.Service;
-using Repositories.CustomerRepository;
+using Services;
+using Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Registra o Service no container de injeção de dependências
-builder.Services.AddScoped<CustomerService>();
-builder.Services.AddScoped<CustomerRepository>();
+builder.Services.AddScoped<Service>();
+builder.Services.AddScoped<Repository>();
 builder.Services.AddLogging();
 
 var app = builder.Build();

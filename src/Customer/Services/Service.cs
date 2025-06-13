@@ -1,17 +1,17 @@
-using plataformatcc.Interfaces;
-using plataformatcc.Models;
-using Repositories.CustomerRepository;
+using Interfaces;
+using Model;
+using Repositories;
 
 
-namespace plataformatcc.Service
+namespace Services
 {
      
-    public class CustomerService : ICustomerService
+    public class Service : IService
     {
-        private readonly ILogger<CustomerService> _logger ;
-        private readonly CustomerRepository _repository ;
+        private readonly ILogger<Service> _logger ;
+        private readonly Repository _repository ;
         
-        public CustomerService(ILogger<CustomerService> logger, CustomerRepository repository)
+        public Service(ILogger<Service> logger, Repository repository)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._repository = repository ?? throw new ArgumentNullException(nameof(repository));

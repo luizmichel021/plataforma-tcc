@@ -1,8 +1,8 @@
-using plataformatcc.Models;
+using Model;
 
-namespace plataformatcc.Interfaces
+namespace Interfaces
 {
-    public interface ICustomerRepository
+    public interface IRepository
     {
         Customer create(Customer customer);
         bool update(Guid id,Customer customer);

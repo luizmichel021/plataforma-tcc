@@ -1,8 +1,8 @@
 
-using plataformatcc.Models;
+using Model;
 
-namespace plataformatcc.Interfaces{
-    public interface ICustomerService
+namespace Interfaces{
+    public interface IService
     {
         Customer create(Customer customer);
         bool update(Guid id, Customer customer);

@@ -1,4 +1,4 @@
-namespace plataformatcc.Models
+namespace Model
 {
     public class Customer
     {

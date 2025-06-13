@@ -1,25 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-using plataformatcc.Models;
-using plataformatcc.Service;
-using Repositories.CustomerRepository;
+using Model;
+using Services;
 
-namespace plataformatcc.ControllerCustomer
+namespace Controller
 {
     [ApiController]
-    [Route("plataformatcc/customer")]
-    public class ControllerCustomer : ControllerBase
+    [Route("customer")]
+    public class Controller : ControllerBase
     {
-        private readonly CustomerRepository _CustomerRepository;
-        
-        public ControllerCustomer(CustomerRepository serivceCustomer)
+        private readonly Service _service;
+
+        public Controller(Service service)
         {
-            _CustomerRepository = serivceCustomer ?? throw new ArgumentNullException(nameof(serivceCustomer));
+            _service = service;
         }
 
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
-            var ret = _CustomerRepository.create(customer);
+            var ret = _service.create(customer);
             if (ret != null)
             {
                 return CreatedAtAction(nameof(Get), new { id = ret.Id }, ret);
@@ -33,7 +32,7 @@ namespace plataformatcc.ControllerCustomer
         [HttpDelete("{id}")]        
         public ActionResult Delete(Guid id)
         {
-            var ret = _CustomerRepository.delete(id);
+            var ret = _service.delete(id);
             if(ret == true)
             {
                 return NoContent();
@@ -48,7 +47,7 @@ namespace plataformatcc.ControllerCustomer
         [HttpGet("{id}")]
         public ActionResult Get(Guid id)
         {
-            var ret = _CustomerRepository.getCustomer(id);
+            var ret = _service.getCustomer(id);
             if(ret != null)
             {
                 return Ok(ret);
@@ -62,14 +61,14 @@ namespace plataformatcc.ControllerCustomer
         [HttpGet]
         public ActionResult GetAll()
         {
-            var customers = _CustomerRepository.getAllCustomers();
+            var customers = _service.getAllCustomers();
             return Ok(customers);
         }
 
         [HttpPut("{id}")]
         public ActionResult Update(Guid id, Customer customer)
         {
-            var ret = _CustomerRepository.update(id, customer);
+            var ret = _service.update(id, customer);
             if(ret == true)
             {
                 return NoContent();
@@ -85,7 +84,7 @@ namespace plataformatcc.ControllerCustomer
         public ActionResult PartialUpdate(Guid id, Customer customer)
         {   
             
-            var ret = _CustomerRepository.partialUpdate(id, customer.Name, customer.Surname, customer.Email, customer.Birthdate);
+            var ret = _service.partialUpdate(id, customer.Name, customer.Surname, customer.Email, customer.Birthdate);
             if (ret)
             {
                 return NoContent();

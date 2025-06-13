@@ -8,10 +8,9 @@ public class Product
     private float price;
     private int quantity;
     private DateTime created_at;
-    private DateTime updated_at;
+    private DateTime update_at;
     private bool active;
-
-    public Product(){}
+    public Product() { }
 
     public Product(string name, string description, float price, int quantity)
     {
@@ -22,38 +21,50 @@ public class Product
         Quantity = quantity;
     }
 
-    public Guid Id 
+    public Guid Id
     {
-        set{id = value;}
-        get{return id;}
-    }   
+        set { id = value; }
+        get { return id; }
+    }
     public string Name
     {
-        get{return name;}
-        set{name = value;}
+        get { return name; }
+        set { name = value; }
     }
-    
+
     public string Description
     {
-        get{return description;}
-        set{description = value;}
+        get { return description; }
+        set { description = value; }
     }
 
     public float Price
     {
-        get{return price;}
-        set{price = value;}
+        get { return price; }
+        set { price = value; }
     }
 
     public int Quantity
     {
-        get{return quantity;}
-        set{quantity = value;}
+        get { return quantity; }
+        set { quantity = value; }
     }
 
     public bool Active
     {
-        get{return active;}
-        set{active = value;}
+        get { return active; }
+        set { active = value; }
     }
+    
+    public DateTime Created_at
+        {
+            get{return created_at;}
+            set{created_at = value;}
+        }
+
+        public DateTime Update_at
+        {
+            get{return update_at;}
+            set{update_at = value;}
+        }
 }
