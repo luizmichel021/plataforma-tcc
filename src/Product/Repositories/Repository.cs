@@ -39,6 +39,7 @@ namespace Repositories
 
             }
         }
+    
         public List<Product> ListAllProducts()
         {
             _logger.LogDebug("[Repository-Product] - Starting a connection on database.");
@@ -252,7 +253,7 @@ namespace Repositories
                 cmd.Parameters.AddRange(parameters.ToArray());
 
                 var ret = cmd.ExecuteNonQuery();
-                _logger.LogInformation("[Repository-Product] - update carried out successfully.")
+                _logger.LogInformation("[Repository-Product] - update carried out successfully.");
 
                 return ret > 0;
             }
