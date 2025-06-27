@@ -3,6 +3,8 @@ using Models.Product;
 using Connections;
 using MySqlConnector;
 
+// LOG REPOSITORY FEITO.
+
 namespace Repositories
 {
     public class Repository : IRepository
@@ -38,7 +40,7 @@ namespace Repositories
             }
         }
         public List<Product> ListAllProducts()
-        {   
+        {
             _logger.LogDebug("[Repository-Product] - Starting a connection on database.");
             using (var connection = this.connection.GetConnection())
             {
@@ -95,7 +97,7 @@ namespace Repositories
                 {
                     selection.Add(" AND (@description IS NULL OR description LIKE CONCAT('%', description, '%')) ");
                     parameters.Add(new MySqlParameter("@description", description));
-                     _logger.LogDebug($"[Repository-Product] - Filter applied: description LIKE '%{description}%'");
+                    _logger.LogDebug($"[Repository-Product] - Filter applied: description LIKE '%{description}%'");
                 }
                 if (pricemax.HasValue)
                 {
@@ -192,7 +194,7 @@ namespace Repositories
                 _logger.LogError(e, "[Repository-Product] - Exception occurred while registering the product.");
                 throw;
             }
-            
+
         }
 
         public bool Update(Guid id, string? name, string? description, float? price, int? quantity)
@@ -226,7 +228,7 @@ namespace Repositories
                     updates.Add("price = @price");
                     parameters.Add(new MySqlParameter("@price", price.Value));
                     _logger.LogDebug($"[Repository-Product] - change applied: price LIKE '%{price}'");
-                    
+
                 }
 
                 if (quantity.HasValue)
@@ -236,7 +238,7 @@ namespace Repositories
                     _logger.LogDebug($"[Repository-Product] - change applied: quantity LIKE '%{quantity}'");
                 }
 
-            
+
                 if (updates.Count == 0)
                 {
                     _logger.LogError("[Repository-Product] - no changes detected.");
